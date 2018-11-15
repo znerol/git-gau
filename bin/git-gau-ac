@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# git-gau-ac - Apply a command and record its output as the commit message.
+
+set -e
+set -u
+
+# Required binaries
+ECHO=/bin/echo
+GIT=/usr/bin/git
+
+# Print usage message and exit.
+if [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: command [args...]" >&2
+    exit 1
+fi
+
+${GIT} checkout ${GAU_CHECKOUT_ARGS:---quiet}
+
+# Run command and record commit message.
+COMMITMSG=$("${@}")
+
+# Record changes to files.
+${GIT} add -A
+${GIT} commit ${GAU_COMMIT_ARGS:---quiet} -m "${COMMITMSG}"

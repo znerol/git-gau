@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# git-gau-xargs - Pipe absolute path of working directory to xargs.
+
+set -e
+set -u
+
+# Required binaries
+ECHO=/bin/echo
+GIT=/usr/bin/git
+XARGS=/usr/bin/xargs
+
+# Print usage message and exit.
+if [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: [xargs params...]" >&2
+    exit 1
+fi
+
+# Run xargs with toplevel working directory.
+TOPLEVEL=$(${GIT} rev-parse --show-toplevel)
+${ECHO} "${TOPLEVEL}" | $XARGS "${@}"

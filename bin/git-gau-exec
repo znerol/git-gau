@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# git-gau-exec - Clone a repository into tmp and run a command against it.
+
+set -e
+set -u
+
+# Required binaries.
+ECHO=/bin/echo
+GIT=/usr/bin/git
+MKTEMP=/bin/mktemp
+RM=/bin/rm
+
+# Print usage message and exit.
+if [ "${#}" -lt 2 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: repository-url command [args...]" >&2
+    exit 1
+fi
+
+# Setup temp dir.
+WORKDIR="$(${MKTEMP} -d)"
+cleanup() {
+    ${RM} -rf "${WORKDIR}"
+}
+trap cleanup EXIT
+
+# Setup required environment.
+GIT_WORK_TREE="${WORKDIR}"
+GIT_DIR="${GIT_WORK_TREE}/.git"
+
+# Clone repository.
+REPOURL="${1}"; shift
+${GIT} clone "${GAU_CLONE_ARGS:---quiet}" -- "${REPOURL}" "${GIT_WORK_TREE}"
+
+# git-clone fails when GIT_WORK_TREE is defined. Thus the environment is only
+# exported just before running the command.
+export GIT_WORK_TREE GIT_DIR
+
+# Run command.
+"${@}"
+
+# Push results (if any).
+${GIT} push "${GAU_PUSH_ARGS:---quiet}" -- origin "$(${GIT} rev-parse --abbrev-ref HEAD)"
