@@ -14,13 +14,16 @@ ifeq ($(mandir),)
     mandir := $(datarootdir)/man
 endif
 
-all: bin doc
+all: bin test doc
 
 %.1 : %.1.md
 	pandoc -s -t man $< -o $@
 
 bin:
 	# empty for now
+
+test: bin
+	PATH="$(shell pwd)/bin:${PATH}" python -m test
 
 doc: \
 	doc/git-gau-ac.1 \
@@ -75,4 +78,5 @@ dist: dist-src dist-bin
 	install \
 	install-bin \
 	install-doc \
+	test \
 	uninstall \
