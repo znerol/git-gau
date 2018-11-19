@@ -10,6 +10,7 @@ ECHO=/bin/echo
 GIT=/usr/bin/git
 MKTEMP=/bin/mktemp
 RM=/bin/rm
+XARGS=/usr/bin/xargs
 
 # Print usage message and exit.
 if [ "${#}" -lt 2 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
@@ -30,7 +31,7 @@ GIT_DIR="${GIT_WORK_TREE}/.git"
 
 # Clone repository.
 REPOURL="${1}"; shift
-${GIT} clone ${GAU_CLONE_ARGS:---quiet} -- "${REPOURL}" "${GIT_WORK_TREE}"
+${ECHO} "${GAU_CLONE_ARGS:---quiet}" -- "${REPOURL}" "${GIT_WORK_TREE}" | ${XARGS} ${GIT} clone
 
 # git-clone fails when GIT_WORK_TREE is defined. Thus the environment is only
 # exported just before running the command.
@@ -40,4 +41,5 @@ export GIT_WORK_TREE GIT_DIR
 "${@}"
 
 # Push results (if any).
-${GIT} push ${GAU_PUSH_ARGS:---quiet} -- origin "$(${GIT} rev-parse --abbrev-ref HEAD)"
+BRANCH="${GAU_PUSH_BRANCH:-$(${GIT} rev-parse --abbrev-ref HEAD)}"
+${ECHO} "${GAU_PUSH_ARGS:---quiet}" -- origin "${BRANCH}" | ${GIT} push

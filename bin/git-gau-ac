@@ -6,8 +6,22 @@ set -e
 set -u
 
 # Required binaries
+CAT=/bin/cat
 ECHO=/bin/echo
 GIT=/usr/bin/git
+MKTEMP=/bin/mktemp
+RM=/bin/rm
+XARGS=/usr/bin/xargs
+
+# Replicate output of command to stdout. Regrettably it is not possible to use
+# `tee` here since not all shells support -o pipefail.
+LOGFILE="$(${MKTEMP})"
+collect_logs() {
+    # Send log to stdout.
+    ${CAT} "${LOGFILE}"
+    ${RM} -f "${LOGFILE}"
+}
+trap collect_logs EXIT
 
 # Print usage message and exit.
 if [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
@@ -15,11 +29,12 @@ if [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; th
     exit 1
 fi
 
-${GIT} checkout ${GAU_CHECKOUT_ARGS:---quiet}
+# Perform a checkout.
+${ECHO} "${GAU_CHECKOUT_ARGS:---quiet}" | ${XARGS} ${GIT} checkout
 
 # Run command and record commit message.
-COMMITMSG=$("${@}")
+"${@}" > "${LOGFILE}"
 
 # Record changes to files.
-${GIT} add -A
-${GIT} commit ${GAU_COMMIT_ARGS:---quiet} -m "${COMMITMSG}"
+${ECHO} "${GAU_ADD_ARGS:---all}" | ${XARGS} ${GIT} add
+${ECHO} -F "${LOGFILE}" "${GAU_COMMIT_ARGS:---quiet}" | ${XARGS} ${GIT} commit
