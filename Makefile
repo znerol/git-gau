@@ -22,6 +22,11 @@ all: bin test doc
 bin:
 	# empty for now
 
+lint: bin
+	shellcheck bin/git-gau-ac
+	shellcheck bin/git-gau-exec
+	shellcheck bin/git-gau-xargs
+
 test: bin
 	PATH="$(shell pwd)/bin:${PATH}" python -m test
 
@@ -78,5 +83,6 @@ dist: dist-src dist-bin
 	install \
 	install-bin \
 	install-doc \
+	lint \
 	test \
 	uninstall \

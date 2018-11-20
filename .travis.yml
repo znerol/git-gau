@@ -1,2 +1,4 @@
-language: minimal
-script: make test
+language: shell
+script:
+  - make lint
+  - make test
