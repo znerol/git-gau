@@ -31,10 +31,12 @@ automatically push a new commit if anything changed.
 # VARIABLES
 
 GAU\_CLONE\_ARGS
-:   Specify additional arguments for the *git clone* command.
+:   Specify additional arguments for the *git clone* command. Defaults to
+    *--quiet*.
 
 GAU\_PUSH\_ARGS
-:   Specify additional arguments for the *git push* command.
+:   Specify additional arguments for the *git push* command. Defaults to
+    *--quiet*.
 
 # SEE ALSO
 

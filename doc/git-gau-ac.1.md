@@ -30,12 +30,18 @@ commit if anything changed.
 # VARIABLES
 
 GAU\_CHECKOUT\_ARGS
-:   Specify additional arguments for the *git checkout* command.
+:   Specify additional arguments for the *git checkout* command. Defaults to
+    *--quiet*.
+
+GAU\_ADD\_ARGS
+:   Specify arguments for the *git add* command. Defaults to *--all*.
 
 GAU\_COMMIT\_ARGS
-:   Specify additional arguments for the *git commit* command.
+:   Specify additional arguments for the *git commit* command. Defaults to
+    *--quiet*.
 
 # SEE ALSO
 
+`git-add` (1).
 `git-checkout` (1).
 `git-commit` (1).
