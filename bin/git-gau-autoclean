@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# git-gau-autoclean - Removes all branches which are already merged.
+
+set -e
+set -u
+
+# Required binaries
+ECHO=/bin/echo
+GIT=/usr/bin/git
+GREP=/bin/grep
+TRUE=/bin/true
+XARGS=/usr/bin/xargs
+
+# Print usage message and exit.
+if [ "${#}" -ne 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: master-branch" >&2
+    exit 1
+fi
+
+# Find merged branches, filter out HEAD (a star on the first line) and the
+# specified master-branch.
+BRANCHES=$(${GIT} branch --list --merged "${1}" | ${GREP} -v "^\*" | ${GREP} -vx "  ${1}" || ${TRUE})
+if [ -n "${BRANCHES}" ]; then
+    ${ECHO} "${BRANCHES}" | ${XARGS} ${GIT} branch -d
+fi

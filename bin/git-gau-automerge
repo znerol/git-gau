@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# git-gau-automerge - Merge all branches matching a given pattern.
+
+set -e
+set -u
+
+# Required binaries
+ECHO=/bin/echo
+GIT=/usr/bin/git
+XARGS=/usr/bin/xargs
+
+# Print usage message and exit.
+if [ "${#}" -ne 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: branch-pattern" >&2
+    exit 1
+fi
+
+BRANCHES=$(${GIT} branch --all --list "${1}")
+${ECHO} "${GAU_MERGE_ARGS:---quiet}" "${BRANCHES}" | ${XARGS} ${GIT} merge
