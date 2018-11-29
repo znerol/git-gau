@@ -24,6 +24,8 @@ bin:
 
 lint: bin
 	shellcheck bin/git-gau-ac
+	shellcheck bin/git-gau-autoclean
+	shellcheck bin/git-gau-automerge
 	shellcheck bin/git-gau-exec
 	shellcheck bin/git-gau-xargs
 
@@ -55,6 +57,8 @@ install-doc: doc
 
 install-bin: bin
 	install -m 0755 -D bin/git-gau-ac $(DESTDIR)$(bindir)/git-gau-ac
+	install -m 0755 -D bin/git-gau-autoclean $(DESTDIR)$(bindir)/git-gau-autoclean
+	install -m 0755 -D bin/git-gau-automerge $(DESTDIR)$(bindir)/git-gau-automerge
 	install -m 0755 -D bin/git-gau-exec $(DESTDIR)$(bindir)/git-gau-exec
 	install -m 0755 -D bin/git-gau-xargs $(DESTDIR)$(bindir)/git-gau-xargs
 
@@ -62,6 +66,8 @@ install: install-bin install-doc
 
 uninstall:
 	-rm -f $(DESTDIR)$(bindir)/git-gau-ac
+	-rm -f $(DESTDIR)$(bindir)/git-gau-autoclean
+	-rm -f $(DESTDIR)$(bindir)/git-gau-automerge
 	-rm -f $(DESTDIR)$(bindir)/git-gau-exec
 	-rm -f $(DESTDIR)$(bindir)/git-gau-xargs
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-ac.1
