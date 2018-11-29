@@ -17,4 +17,6 @@ if [ "${#}" -ne 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; th
 fi
 
 BRANCHES=$(${GIT} branch --all --list "${1}")
-${ECHO} "${GAU_MERGE_ARGS:---quiet}" "${BRANCHES}" | ${XARGS} ${GIT} merge
+if [ -n "${BRANCHES}" ]; then
+    ${ECHO} "${GAU_MERGE_ARGS:---quiet}" "${BRANCHES}" | ${XARGS} ${GIT} merge
+fi

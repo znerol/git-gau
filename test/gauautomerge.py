@@ -24,6 +24,30 @@ class AutomergeTestCase(unittest.TestCase):
         if self.repodir is not None:
             shutil.rmtree(self.repodir)
 
+    def testNoMatch(self):
+        """
+        Do nothing if no branch matches the pattern
+        """
+        file1 = os.path.join(self.repodir, 'test.txt')
+        content1 = 'hello!\n'
+
+        self._cmd('git', 'checkout', '-q', '-b', 'feature/master/file-1', 'master')
+        with open(file1, 'w') as stream:
+            stream.write(content1)
+        self._cmd('git', 'add', file1)
+        self._cmd('git', 'commit', '-q', '-m', 'add a file')
+
+        self._cmd('git', 'checkout', '-q', 'master')
+
+        logs = self._cmd('git', 'log', '--format=%s')
+        self.assertEqual(logs, b'Initial commit\n')
+
+        self._cmd('git', 'gau-automerge', 'feature/master/auto-*')
+
+        logs = self._cmd('git', 'log', '--format=%s')
+        self.assertEqual(logs, b'Initial commit\n')
+
+
     def testFastForwardMerge(self):
         """
         Merge of a simple fast-forward commit succeeds.
