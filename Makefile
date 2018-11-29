@@ -32,11 +32,15 @@ test: bin
 
 doc: \
 	doc/git-gau-ac.1 \
+	doc/git-gau-autoclean.1 \
+	doc/git-gau-automerge.1 \
 	doc/git-gau-exec.1 \
 	doc/git-gau-xargs.1
 
 clean:
 	-rm -f doc/git-gau-ac.1
+	-rm -f doc/git-gau-autoclean.1
+	-rm -f doc/git-gau-automerge.1
 	-rm -f doc/git-gau-exec.1
 	-rm -f doc/git-gau-xargs.1
 	-rm -rf dist
@@ -44,6 +48,8 @@ clean:
 
 install-doc: doc
 	install -m 0644 -D doc/git-gau-ac.1 $(DESTDIR)$(mandir)/man1/git-gau-ac.1
+	install -m 0644 -D doc/git-gau-autoclean.1 $(DESTDIR)$(mandir)/man1/git-gau-autoclean.1
+	install -m 0644 -D doc/git-gau-automerge.1 $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
 	install -m 0644 -D doc/git-gau-exec.1 $(DESTDIR)$(mandir)/man1/git-gau-exec.1
 	install -m 0644 -D doc/git-gau-xargs.1 $(DESTDIR)$(mandir)/man1/git-gau-xargs.1
 
@@ -59,6 +65,8 @@ uninstall:
 	-rm -f $(DESTDIR)$(bindir)/git-gau-exec
 	-rm -f $(DESTDIR)$(bindir)/git-gau-xargs
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-ac.1
+	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-autoclean.1
+	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-exec.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-xargs.1
 
