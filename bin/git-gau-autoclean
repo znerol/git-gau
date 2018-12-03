@@ -20,7 +20,7 @@ fi
 
 # Find merged branches, filter out HEAD (a star on the first line) and the
 # specified master-branch.
-BRANCHES=$(${GIT} branch --list --merged "${1}" | ${GREP} -v "^\*" | ${GREP} -vx "  ${1}" || ${TRUE})
+BRANCHES=$(${GIT} branch --list --merged "${1}" | ${GREP} -v "^\\*" | ${GREP} -vx "  ${1}" || ${TRUE})
 if [ -n "${BRANCHES}" ]; then
     ${ECHO} "${BRANCHES}" | ${XARGS} ${GIT} branch -d
 fi
