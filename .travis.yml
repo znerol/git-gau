@@ -22,7 +22,7 @@ deploy:
     - dist/git-gau-src.tar.gz
     - dist/git-gau-dist.tar.gz
   skip_cleanup: true
+  draft: true
   on:
     repo: znerol/git-gau
     tags: true
-    draft: true
