@@ -1,4 +1,4 @@
-% git-gau-ac(1) Git Gau User Manuals
+% git-gau-xargs(1) Git Gau User Manuals
 % Lorenz Schori
 % November 13, 2018
 
