@@ -7,6 +7,14 @@ commit and push changes automatically.
 
 ## INSTALL
 
+Navigate to the releases page and pick the latest `git-gau-dist.tar.gz`
+tarball. Copy it to the target machine and unpack it there.
+
+    $ scp dist/git-gau-dist.tar.gz me@example.com:~
+    $ ssh me@example.com sudo tar -C /usr/local -xzf ~:git-gau-dist.tar.gz
+
+## BUILD
+
 *Preferred method*: Build a distribution tarball, copy it to the target machine
 and unpack it there.
     
