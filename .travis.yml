@@ -1,4 +1,15 @@
 language: shell
+
+dist: xenial
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - pandoc
+
 script:
   - make lint
   - make test
+  - make dist
+  - tar xf dist/git-gau-dist.tar.gz
