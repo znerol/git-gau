@@ -26,6 +26,7 @@ lint: bin
 	shellcheck bin/git-gau-ac
 	shellcheck bin/git-gau-autoclean
 	shellcheck bin/git-gau-automerge
+	shellcheck bin/git-gau-entry
 	shellcheck bin/git-gau-exec
 	shellcheck bin/git-gau-xargs
 
@@ -36,6 +37,7 @@ doc: \
 	doc/git-gau-ac.1 \
 	doc/git-gau-autoclean.1 \
 	doc/git-gau-automerge.1 \
+	doc/git-gau-entry.1 \
 	doc/git-gau-exec.1 \
 	doc/git-gau-xargs.1
 
@@ -43,6 +45,7 @@ clean:
 	-rm -f doc/git-gau-ac.1
 	-rm -f doc/git-gau-autoclean.1
 	-rm -f doc/git-gau-automerge.1
+	-rm -f doc/git-gau-entry.1
 	-rm -f doc/git-gau-exec.1
 	-rm -f doc/git-gau-xargs.1
 	-rm -rf dist
@@ -52,6 +55,7 @@ install-doc: doc
 	install -m 0644 -D doc/git-gau-ac.1 $(DESTDIR)$(mandir)/man1/git-gau-ac.1
 	install -m 0644 -D doc/git-gau-autoclean.1 $(DESTDIR)$(mandir)/man1/git-gau-autoclean.1
 	install -m 0644 -D doc/git-gau-automerge.1 $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
+	install -m 0644 -D doc/git-gau-entry.1 $(DESTDIR)$(mandir)/man1/git-gau-entry.1
 	install -m 0644 -D doc/git-gau-exec.1 $(DESTDIR)$(mandir)/man1/git-gau-exec.1
 	install -m 0644 -D doc/git-gau-xargs.1 $(DESTDIR)$(mandir)/man1/git-gau-xargs.1
 
@@ -59,6 +63,7 @@ install-bin: bin
 	install -m 0755 -D bin/git-gau-ac $(DESTDIR)$(bindir)/git-gau-ac
 	install -m 0755 -D bin/git-gau-autoclean $(DESTDIR)$(bindir)/git-gau-autoclean
 	install -m 0755 -D bin/git-gau-automerge $(DESTDIR)$(bindir)/git-gau-automerge
+	install -m 0755 -D bin/git-gau-entry $(DESTDIR)$(bindir)/git-gau-entry
 	install -m 0755 -D bin/git-gau-exec $(DESTDIR)$(bindir)/git-gau-exec
 	install -m 0755 -D bin/git-gau-xargs $(DESTDIR)$(bindir)/git-gau-xargs
 
@@ -68,11 +73,13 @@ uninstall:
 	-rm -f $(DESTDIR)$(bindir)/git-gau-ac
 	-rm -f $(DESTDIR)$(bindir)/git-gau-autoclean
 	-rm -f $(DESTDIR)$(bindir)/git-gau-automerge
+	-rm -f $(DESTDIR)$(bindir)/git-gau-entry
 	-rm -f $(DESTDIR)$(bindir)/git-gau-exec
 	-rm -f $(DESTDIR)$(bindir)/git-gau-xargs
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-ac.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-autoclean.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
+	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-entry.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-exec.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-xargs.1
 
