@@ -95,6 +95,9 @@ dist-src:
 
 dist: dist-src dist-bin
 
+integration-test: dist
+	${MAKE} -C integration-test all
+
 .PHONY: \
 	all \
 	clean \
@@ -104,6 +107,7 @@ dist: dist-src dist-bin
 	install \
 	install-bin \
 	install-doc \
+	integration-test \
 	lint \
 	test \
 	uninstall \
