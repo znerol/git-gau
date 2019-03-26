@@ -28,6 +28,8 @@ jobs:
         apt:
           packages:
             - pandoc
+      env:
+        secure: nD3bd+lh449hQTsQjTgFWV1YYObXc9gzy/XedZc9Fw3X6EMPLWbWP2DSJvudUp8eJZViTqQnlpZO00/6Xk8RGb9lhXWW4oOBzC3yw930nKomarSt7bg4odDHLG7JQNEJBN9jYL6Y4hn8d8tCDHqQe71IDoBEUZpl+RK/yQ57tTUuCzJdOO4RPk3dEu8ccGFSn8nQOsgko24eegBi5uyfpkl9RT93UKEIKOP0XqFA2sZbVlSq1inUbvef95NnadOZiHDWlbV1SNoOCi2QpkqlG2hzbwKgLGw3xipKereIe06Rgc3sn1IeUi3N05IW1EuTqnD228kAgvBNKUmTrXgcJmhVYiP5F2/7vARkb1fDZyyo4BPemhXh3XAFza/mICdqTZYvo7+bWnMSmJTunzFHUSUARQeKnyJIed7SxPDrdUrYoX9rQM4ltJviyCJ+F8CKlqOWz2U5kchXhr3no8n7yGLXiJfwqtC8+OxbP8+4kOD2WGZPsg4qbCYBrzIBw78kbdjtMcR5Xltym1yVmEHPIEENyD5/s/RrLwBiCrZhp5H2El2yZ/0mnImx6lrd1/dW4QDM+FgqZWepNcwbcsxWTuXHqx/S0wVoW3lD+QH/F7J30BfX3A9xq+LgljXsJz+lu8ZvlmD5lu7XYfPDnllOm1BkXEI8UPh/zBdsxjN6fA4=
       before_script:
         - make dist
         - make -C integration-test image

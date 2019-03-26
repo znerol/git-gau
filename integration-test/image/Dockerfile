@@ -6,6 +6,8 @@ RUN apk update && apk upgrade && \
 COPY context/git-gau-dist.tar.gz /root/
 RUN tar -C /usr/local -xf /root/git-gau-dist.tar.gz
 
-USER nobody
+RUN addgroup -S git-gau && adduser -S git-gau -G git-gau
+
+USER git-gau
 
 ENTRYPOINT ["/usr/bin/git", "gau-entry"]
