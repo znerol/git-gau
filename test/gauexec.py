@@ -89,3 +89,52 @@ class ExecTestCase(unittest.TestCase):
         self.assertEqual(prevauthor, b'Test\n')
         prevmail = self._cmd('git', 'show', '--no-patch', '--format=%ae', 'HEAD^')
         self.assertEqual(prevmail, b'test@localhost\n')
+
+    def testCommitAndPushNewBranch(self):
+        """
+        Simple script no changes, push to new branch.
+        """
+        env = os.environ.copy()
+        env.update({
+            'GIT_COMMITTER_NAME': 'Test Committer',
+            'GIT_COMMITTER_EMAIL': 'committer@localhost',
+            'GIT_AUTHOR_NAME': 'Test Author',
+            'GIT_AUTHOR_EMAIL': 'author@localhost',
+            'GAU_PUSH_BRANCH': 'feature/master/updates-123'
+        })
+
+        script = 'git commit --quiet --allow-empty -m "Branch commit"'
+        self._cmd('git', 'gau-exec', self.repodir,
+                           '/bin/sh', '-c', script, env=env)
+
+        logs = self._cmd('git', 'log', '--format=%s', 'master')
+        self.assertEqual(logs, b'Initial commit\n')
+
+        logs = self._cmd('git', 'log', '--format=%s', 'feature/master/updates-123')
+        self.assertEqual(logs, b'Branch commit\nInitial commit\n')
+
+        curauthor = self._cmd('git', 'show', '--no-patch', '--format=%an', 'feature/master/updates-123')
+        self.assertEqual(curauthor, b'Test Author\n')
+        curmail = self._cmd('git', 'show', '--no-patch', '--format=%ae', 'feature/master/updates-123')
+        self.assertEqual(curmail, b'author@localhost\n')
+
+        prevauthor = self._cmd('git', 'show', '--no-patch', '--format=%an', 'feature/master/updates-123^')
+        self.assertEqual(prevauthor, b'Test\n')
+        prevmail = self._cmd('git', 'show', '--no-patch', '--format=%ae', 'feature/master/updates-123^')
+        self.assertEqual(prevmail, b'test@localhost\n')
+
+    def testCheckoutAndPushNewBranch(self):
+        """
+        Simple script no changes, push to new branch.
+        """
+        env = os.environ.copy()
+
+        script = 'git checkout -b feature/master/bells-and-whistles'
+        self._cmd('git', 'gau-exec', self.repodir,
+                           '/bin/sh', '-c', script, env=env)
+
+        logs = self._cmd('git', 'log', '--format=%s', 'master')
+        self.assertEqual(logs, b'Initial commit\n')
+
+        logs = self._cmd('git', 'log', '--format=%s', 'feature/master/bells-and-whistles')
+        self.assertEqual(logs, b'Initial commit\n')
