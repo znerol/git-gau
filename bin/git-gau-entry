@@ -1,5 +1,9 @@
 #!/bin/sh
 
+set -e
+set -u
+
+ECHO=/bin/echo
 GIT=/usr/bin/git
 MKDIR=/bin/mkdir
 SSH_ADD=/usr/bin/ssh-add
@@ -12,10 +16,13 @@ if [ -z "${GAU_REPO}" ] || [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:--
     exit 1
 fi
 
-GAU_SSH_DIR="${GAU_SSH_PRIVKEY_FILE:=${HOME}/.ssh}"
-GAU_SSH_PRIVKEY_FILE="${GAU_SSH_PRIVKEY_FILE:=${GAU_SSH_DIR}/id_rsa}"
-GAU_GIT_CREDENTIALS_FILE="${GAU_GIT_CREDENTIALS_FILE:=${GAU_SSH_DIR}/.git-credentials}"
-GAU_SSH_KNOWNHOSTS_FILE="${GAU_SSH_KNOWNHOSTS_FILE:=${GAU_SSH_DIR}/known_hosts}"
+GAU_SSH_DIR="${GAU_SSH_PRIVKEY_FILE:-${HOME}/.ssh}"
+GAU_SSH_PRIVKEY="${GAU_SSH_PRIVKEY:-}"
+GAU_SSH_PRIVKEY_FILE="${GAU_SSH_PRIVKEY_FILE:-${GAU_SSH_DIR}/id_rsa}"
+GAU_GIT_CREDENTIALS="${GAU_GIT_CREDENTIALS:-}"
+GAU_GIT_CREDENTIALS_FILE="${GAU_GIT_CREDENTIALS_FILE:-${GAU_SSH_DIR}/.git-credentials}"
+GAU_SSH_KNOWNHOSTS="${GAU_SSH_KNOWNHOSTS:-}"
+GAU_SSH_KNOWNHOSTS_FILE="${GAU_SSH_KNOWNHOSTS_FILE:-${GAU_SSH_DIR}/known_hosts}"
 
 # Optionally write git credentials file.
 if [ -n "${GAU_GIT_CREDENTIALS}" ]; then
@@ -26,7 +33,7 @@ fi
 
 # Optionally write an SSH private key file.
 if [ -n "${GAU_SSH_PRIVKEY}" ]; then
-    ${MKDIR} -p "${GAU_SSH_DIR}"
+    ${MKDIR} -m 0700 -p "${GAU_SSH_DIR}"
     if [ ! -e "${GAU_SSH_PRIVKEY_FILE}" ]; then
         (umask 077 && ${ECHO} "${GAU_SSH_PRIVKEY}" > "${GAU_SSH_PRIVKEY_FILE}")
     fi
@@ -34,7 +41,7 @@ fi
 
 # Optionally setup the SSH agent.
 if [ -n "${GAU_SSH_SETUP_AGENT}" ]; then
-    ${MKDIR} -p "${GAU_SSH_DIR}"
+    ${MKDIR} -m 0700 -p "${GAU_SSH_DIR}"
     eval "$(${SSH_AGENT})"
     if [ -e "${GAU_SSH_PRIVKEY_FILE}" ]; then
         ${SSH_ADD} "${GAU_SSH_PRIVKEY_FILE}"
@@ -43,7 +50,7 @@ fi
 
 # Optionally setup the SSH known hosts file.
 if [ -n "${GAU_SSH_KNOWNHOSTS}" ]; then
-    ${MKDIR} -p "${GAU_SSH_DIR}"
+    ${MKDIR} -m 0700 -p "${GAU_SSH_DIR}"
     if [ ! -e "${GAU_SSH_KNOWNHOSTS_FILE}" ]; then
         ${ECHO} "${GAU_SSH_KNOWNHOSTS}" > "${GAU_SSH_KNOWNHOSTS_FILE}"
     fi
