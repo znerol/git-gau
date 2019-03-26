@@ -34,6 +34,10 @@ GAU\_CLONE\_ARGS
 :   Specify additional arguments for the *git clone* command. Defaults to
     *--quiet*.
 
+GAU\_PUSH\_BRANCH
+:   Specify a custom branch where changes are pushed to. Defaults to currently
+    checked out branch.
+
 GAU\_PUSH\_ARGS
 :   Specify additional arguments for the *git push* command. Defaults to
     *--quiet*.
