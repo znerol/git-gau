@@ -42,4 +42,8 @@ export GIT_WORK_TREE GIT_DIR
 
 # Push results (if any).
 BRANCH="${GAU_PUSH_BRANCH:-$(${GIT} rev-parse --abbrev-ref HEAD)}"
-${ECHO} "${GAU_PUSH_ARGS:---quiet}" -- origin "HEAD:${BRANCH}" | ${XARGS} ${GIT} push
+BRANCHHASH=$(${GIT} rev-parse "origin/${BRANCH}" 2>/dev/null || ${ECHO})
+HEADHASH="$(${GIT} rev-parse HEAD)"
+if [ -z "$BRANCHHASH" ] || [ "${HEADHASH}" != "${BRANCHHASH}" ]; then
+    ${ECHO} "${GAU_PUSH_ARGS:---quiet}" -- origin "HEAD:${BRANCH}" | ${XARGS} ${GIT} push
+fi
