@@ -10,4 +10,10 @@ RUN addgroup -S git-gau && adduser -S git-gau -G git-gau
 
 USER git-gau
 
-ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/ssh-agent", "/usr/bin/git", "gau-entry"]
+ENTRYPOINT [ \
+    "/sbin/tini", \
+    "--", \
+    "/usr/bin/ssh-agent", \
+    "/usr/local/lib/git-gau/docker-entry", \
+    "/usr/local/lib/git-gau/docker-entry.d" \
+]

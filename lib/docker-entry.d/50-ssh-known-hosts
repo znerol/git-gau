@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+set -u
+
+ECHO=/bin/echo
+MKDIR=/bin/mkdir
+
+GAU_SSH_DIR="${GAU_SSH_DIR:-${HOME}/.ssh}"
+GAU_SSH_KNOWNHOSTS="${GAU_SSH_KNOWNHOSTS:-}"
+GAU_SSH_KNOWNHOSTS_FILE="${GAU_SSH_KNOWNHOSTS_FILE:-${GAU_SSH_DIR}/known_hosts}"
+
+# Optionally setup the SSH known hosts file.
+if [ -n "${GAU_SSH_KNOWNHOSTS}" ]; then
+    ${MKDIR} -m 0700 -p "${GAU_SSH_DIR}"
+    if [ ! -e "${GAU_SSH_KNOWNHOSTS_FILE}" ]; then
+        ${ECHO} "${GAU_SSH_KNOWNHOSTS}" > "${GAU_SSH_KNOWNHOSTS_FILE}"
+    fi
+fi

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+set -u
+
+ECHO=/bin/echo
+MKDIR=/bin/mkdir
+SSH_ADD=/usr/bin/ssh-add
+
+GAU_SSH_DIR="${GAU_SSH_DIR:-${HOME}/.ssh}"
+GAU_SSH_PRIVKEY="${GAU_SSH_PRIVKEY:-}"
+GAU_SSH_PRIVKEY_FILE="${GAU_SSH_PRIVKEY_FILE:-${GAU_SSH_DIR}/id_rsa}"
+
+# Optionally write an SSH private key file.
+if [ -n "${GAU_SSH_PRIVKEY}" ]; then
+    ${MKDIR} -m 0700 -p "${GAU_SSH_DIR}"
+    if [ ! -e "${GAU_SSH_PRIVKEY_FILE}" ]; then
+        (umask 077 && ${ECHO} "${GAU_SSH_PRIVKEY}" > "${GAU_SSH_PRIVKEY_FILE}")
+    fi
+fi
+
+# Optionally add an SSH private key file into the agent.
+if [ -n "${SSH_AGENT_PID:-}" ] && [ -e "${GAU_SSH_PRIVKEY_FILE}" ]; then
+    ${SSH_ADD} "${GAU_SSH_PRIVKEY_FILE}"
+fi
