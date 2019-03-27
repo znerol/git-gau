@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix and document push to custom branch feature #3
 - Only attempt to push when there are new commits #2
+- Add entry point script for docker containers #1
 
 ## 1.0.0 - 2018-12-03
 ### Added

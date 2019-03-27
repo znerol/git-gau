@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+set -u
+
+ECHO=/bin/echo
+GIT=/usr/bin/git
+RUNPARTS=/bin/run-parts
+
+# Print usage message and exit.
+if [ "${#}" -lt 2 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: docker-entry.d command [args...]" >&2
+    exit 1
+fi
+
+PARTSDIR="${1}"
+shift
+
+if [ -d "${PARTSDIR}" ]; then
+    ${RUNPARTS} --exit-on-error "${PARTSDIR}"
+fi
+
+if [ -n "${GAU_REPO:-}" ]; then
+    exec ${GIT} gau-exec "${GAU_REPO}" "${@}"
+else
+    exec "${@}"
+fi
