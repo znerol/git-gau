@@ -6,12 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+
+## [1.1.0] - 2019-03-27
+### Added
+- Add entry point script for docker containers #1
+
+### Changed
 - Fix and document push to custom branch feature #3
 - Only attempt to push when there are new commits #2
-- Add entry point script for docker containers #1
 
 ## 1.0.0 - 2018-12-03
 ### Added
 - Initial release.
 
-[Unreleased]: https://github.com/znerol/git-gau/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/znerol/git-gau/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/znerol/git-gau/compare/v1.0.0...v1.1.0
