@@ -29,7 +29,9 @@ jobs:
           packages:
             - pandoc
       env:
-        secure: ETsnPyWisRsIrZVqRs9C+YO9DWqts1Ai66EvZfu0ocmn0ntsjPOPh8uJ1lNOSa7+LE4jVwlm6MEJNW3gOVrXCfSIQJaxmOdFWeQKTD3lcbRhKPJ0iVmajt2vfsKn8Wy84RqFe59OUXqthaqQAL4pvcoVn0rpaumBCi61Yx8oWkRSZZkkYBcoMj8SxTvBLbAzbrj8G5UHZxSwBllPVQT+brxrnZuJ4EHkpPcRL3zz3SX2cC33ObbXmozfLCseSe+4WQrinmS3vD719m7tM3/ehXNxfo9tNAGWlExthFeQf+DjW6bE2fM8E6SEYyDZA6O67rdfr75EDF3yvaO6tj13C9XOXuaydm4ZGMCbjD2hybdT+ZNNlD34sFY2ScF/b/2NaxA8HSCdbA+G2NQQlTDktaxfz6dvCZelP6zgZUrR8IWK5unu34YmQZucrYjMLLaEtGjnShpxvDZgpZvyaN1VBspwYxIpZz0BrVWeHiYtCQS5lIzVUTwgdMMqSRNYhXcxo7GdtmJ5hj8cXff7kyBEO39EjIrRJZB3kzkmyyVqeeCJs05l/2wE4CrhiE50QfmAhCH2J4Af/yDn0cGC4+Emm66zP7yyJeIcGpGNhwTVpP3Ex1p5Wc4nemtq+rM1658dx/tzc5RgBwTkpBmGOvbivKn78bf+cWsggoiir2MTcSk=
+        # Generated using the following BASH command line:
+        # travis encrypt GAU_SSH_PRIVKEY=$(printf %q "$(</path/to/ssh/private.key)")
+        secure: N2+2dBA1L1cdxdD4hN9iEWQlpAlbg0iS5KwZw8Ue/d93ewxVgDNELNG0ampxSH7D7rvkEVgM5fnfLTXSFIQMs8yGJF2CWYT8Zv8CyqvgZ95dJv5G/eXiMjrcR0Szg9mYKnOzy52A/NreB9e+kDTd8lkKe+QbjZcZuX4RI2aQWUzwMrq12KRx1gGUTWhv/xLFQfiMW9Y8KBV9Ppc+sBb2fcQ3A99gPAn0bIRZKcB5cWDMIU6lJo4/f+ZsAjbitlJRLxsT6mI0gJLHg4nvOzEI4OGMr0jvEPSshawzYGx6CdAqfP7RB5VTnKJ4piLjYJAckGmCLJ8fN7FP3EdULhB+/nzfvF9k1l8ZuLx6qFSk12CJ2wl2jHZpYFg9ZaGZ0uqKIDX8/EHnqr3gcYBl6eXTGxtvePeygxqKw+F7SLZM7m44chqjZYGjC0NavmDAAfN2913DspaFiEgsJ3RULHnD01KG+aHpcBHk/y8soUzW30zwBp+ojtvYsHSawBgIwNajD7bMWgQApP6HjQDaeLbNuXSZ/y2i4ZJFHKUdVXpejPLwGXe36rWAHkAdCWxan5lPNKhQu4GoT/mJ/sg1QWwPAZEPjykNDN5+8n8qG7yZFdnCnemCfuptYXOYW3B8G3LbgV3UD94IKWEJJFAZvzihcgnQngg8XtNR7SMtPOWOAF0=
       before_script:
         - make dist
         - make -C integration-test image
