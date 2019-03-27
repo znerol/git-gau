@@ -9,9 +9,8 @@ MKDIR=/bin/mkdir
 SSH_ADD=/usr/bin/ssh-add
 
 # Print usage message and exit.
-if [ -z "${GAU_REPO}" ] || [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+if [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
     ${ECHO} "${0}: command [args...]" >&2
-    ${ECHO} "Environment variable GAU_REPO is required" >&2
     exit 1
 fi
 
@@ -51,4 +50,8 @@ if [ -n "${GAU_SSH_KNOWNHOSTS}" ]; then
     fi
 fi
 
-exec ${GIT} gau-exec "$GAU_REPO" "$@"
+if [ -n "${GAU_REPO:-}" ]; then
+    exec ${GIT} gau-exec "${GAU_REPO}" "${@}"
+else
+    exec "${@}"
+fi
