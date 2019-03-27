@@ -29,7 +29,7 @@ jobs:
           packages:
             - pandoc
       env:
-        secure: W+0Zmb13eZ9Gh+lD6DPCLHI7bqNoXNiFgWVcErdFuEJa5fjm61MXOjAGyHLe0Fr9OoBpcZbEdS7a5axzkrZN0eSvCjGoLHb9HOtjYNnkIyKrUCUCxyDFpJs1g9b0Euwlwyktch+5uXd8/3M+ltpLRcS5uCorL5ZUX2IkbaTmr+iM9q2y49khKSicAno+HBvVo+m1YBkvsyuhZZZGLXaN+O5hhio1xInHAJfKLgAqf2m0NWxM9A7Yk9lAUDG9m57eUsuNXwPtCkc/pdbUlhPWmdIkzwFrytOiLQeXI+J0WoXMjD+Fsr0gIcYIOb2H9mGd8AuixGEr0ZGbc0dHEcemb5HloEYqBR0C8T8EsYVa6njJZ3L0AZvLoPsPNEHoOFIQpuPykQeMf35i1qnpnAwFLElJEm1Ca/Yv+xlpBh22KPaAchSwlrwvLiHHxob/3EGSp3vLtg2Wz1rM/0OZqMYf2r/pSUBX770gFyFDqIAo1TLw33AhwwD1linkHq6ZB7GStegGqfAS/wvbMhiyz6JDxR2VHbamDpUZpdf5fF3TM1+g9NE1rRW5W4qlA2eUEP5a8OoWftEDzjAP1C9l74ovuMvXcHotBY2ll7LWb+mtct6SNSqWV45jEWi/yf2hSP+Fless6/5QMFBeIiTcnT+/aOkP5mcGHhKHfeyZjyZIeyc=
+        secure: LoftIs2jsNJZT++Z5LJvnpN6eLrhfnfNE+d+L4Efvw1sSAItWxQ4LiTupY8bFHqoUN4IaeV5wG93i3Sn+z23I7OrFmB7kQ0R02hqH+CgIoJARlNGX02LOKitKhrF7RiiHh8MFWP9QMbsv7XlS7KscUWw0kHVr6leEgYqklJ0WAxrW2C695aIBckN4Olo83zOtnG9cYz05S8t1EU1St+Ezfm89IpOYDOmxwdgLAA5O7MNdLExX2HvvynSP1H+iNukc7me+uOO90ObY62flRf6+8SCdY83LF1GXWajbwcSLjI9WQu3Huhf/1HBiVUhis7OKDt9xiKyq+mWdFEUDSnea9LsUsEq96u67m7WXIQMFQ0sYwIcVaFnLEYr1faLqBZ9KXrikXnk9UKe+VPJlqoE4Pbw7YuOFBsw1JD9o8oS2NXCEajn4upsT2ZRrdMsPadq/Mrx1nvrK6208kLjGoGiAA4g2H/52CtO9UKJhPhC2zEYLdwmTRM5SwpMQjkN4ujbPcW42Yn9v2pZFgMwIdvWuSUv55saEs3P1orXmrn+cEw6OiuaWymg6opb7xSqjeE0TSogTInRpE1Thw1Gf+JZ+JXoq0H8ChOdEtuEVrMVakp8/VuXO6r71bVjVwboK47USPZ3K63ebOEMyQ4Z/lk4N+kzKpBaXlb2QGC2eoIE56E=
       before_script:
         - make dist
         - make -C integration-test image
