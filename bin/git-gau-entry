@@ -14,7 +14,7 @@ if [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; th
     exit 1
 fi
 
-GAU_SSH_DIR="${GAU_SSH_PRIVKEY_FILE:-${HOME}/.ssh}"
+GAU_SSH_DIR="${GAU_SSH_DIR:-${HOME}/.ssh}"
 GAU_SSH_PRIVKEY="${GAU_SSH_PRIVKEY:-}"
 GAU_SSH_PRIVKEY_FILE="${GAU_SSH_PRIVKEY_FILE:-${GAU_SSH_DIR}/id_rsa}"
 GAU_GIT_CREDENTIALS="${GAU_GIT_CREDENTIALS:-}"
