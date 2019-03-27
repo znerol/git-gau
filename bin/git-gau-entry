@@ -7,7 +7,6 @@ ECHO=/bin/echo
 GIT=/usr/bin/git
 MKDIR=/bin/mkdir
 SSH_ADD=/usr/bin/ssh-add
-SSH_AGENT=/usr/bin/ssh-agent
 
 # Print usage message and exit.
 if [ -z "${GAU_REPO}" ] || [ "${#}" -lt 1 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
@@ -39,13 +38,9 @@ if [ -n "${GAU_SSH_PRIVKEY}" ]; then
     fi
 fi
 
-# Optionally setup the SSH agent.
-if [ -n "${GAU_SSH_SETUP_AGENT}" ]; then
-    ${MKDIR} -m 0700 -p "${GAU_SSH_DIR}"
-    eval "$(${SSH_AGENT})"
-    if [ -e "${GAU_SSH_PRIVKEY_FILE}" ]; then
-        ${SSH_ADD} "${GAU_SSH_PRIVKEY_FILE}"
-    fi
+# Optionally add an SSH private key file into the agent.
+if [ -n "${SSH_AGENT_PID:-}" ] && [ -e "${GAU_SSH_PRIVKEY_FILE}" ]; then
+    ${SSH_ADD} "${GAU_SSH_PRIVKEY_FILE}"
 fi
 
 # Optionally setup the SSH known hosts file.

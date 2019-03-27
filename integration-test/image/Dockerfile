@@ -10,4 +10,4 @@ RUN addgroup -S git-gau && adduser -S git-gau -G git-gau
 
 USER git-gau
 
-ENTRYPOINT ["/usr/bin/git", "gau-entry"]
+ENTRYPOINT ["/usr/bin/ssh-agent", "/usr/bin/git", "gau-entry"]
