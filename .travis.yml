@@ -50,8 +50,11 @@ jobs:
         api_key:
           secure: d5OiTAzExGVZwwrx+a4yLGgSl60rlMP++C06AfkSclmm67UrnTj6ysLJUVnB9hy0+NPIBxCtHc4oN9ctT8ihEC2unGx/ddD+D3m6yjYLJ5tX1hyqoznaN1k0skayBPWOdgpH30QWGQp0L9TXchc6GevAteukhtai8CCSQlHMJoDsjbVhPoO5tMMqlekcDfEuTWe4Xv8t3RKF4Rf5h4h9VZUg/6nI6rGgwbi1hEvqUfu7qyK6p37yVbhy3J+29oIQhBYrpYm2JVPCNDC7n72c269EPoOeA8Ni69hD9rhf3X5q4Ncvbm4a/lXYY9Mr0uOqmYgJYZPqCkL6S3VJSDPtpAGaU3FbSdkUQCQo7SYJtaLJ55SMpIMZ5eED5t3v18wdws8R0mxufqrcKhNV78y4/lgrbhj2bmwk7V9+LtDomT/TbpqHtHzINZHuFtBHpGCX1m3y6Lei/wmihqoMtNvYHGrve4jcpZvPtJ3WTLk/z1pRR4V77Kd0VsewkEOeL6Hlnso1atK5AWnNDnOKok49Z+Cqq0JlZKWAB1hyyHlD89ebPZNtOfzZPbhhRn3VWYwYBOm2dH1FzGniC57q1kUCh26m2pRGzDvtf2qTjMLMDQG0JxEd+Nz5AkrBXj4Go7xPfzoDBghUJC/kapUCJ03a3yvHVwAOWtCf239Svz26zuA=
         file:
-          - dist/git-gau-src.tar.gz
           - dist/git-gau-dist.tar.gz
+          - dist/git-gau-src.tar.gz
+          - dist/md5sum.txt
+          - dist/sha1sum.txt
+          - dist/sha256sum.txt
         skip_cleanup: true
         draft: true
         on:
