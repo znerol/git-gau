@@ -62,6 +62,12 @@ GAU\_GIT\_CREDENTIALS
     container command is executed. Respected by
     `docker-entry.d/50-git-credentials`.
 
+GAU\_GIT\_CREDENTIALS\_SRC\_FILE
+:   Path to a file containing git credentials as expected by
+    `git-credential-store`. If this variable is set, the file is copied to
+    `${GAU_GIT_CREDENTIALS_FILE}` before container command is executed.
+    Respected by `docker-entry.d/50-git-credentials`.
+
 GAU\_GIT\_CREDENTIALS\_FILE
 :   Where GIT credentials are written to. Defaults to
     `${HOME}/.git-credentials`. Respected by `docker-entry.d/50-git-credentials`.
@@ -76,6 +82,11 @@ GAU\_SSH\_KNOWNHOSTS
     written to `${GAU_SSH_KNOWNHOSTS_FILE}` before container command is executed.
     Respected by `docker-entry.d/50-ssh-known-hosts`.
 
+GAU\_SSH\_KNOWNHOSTS\_SRC\_FILE
+:   Path to a file containing expected SSH host fingerprints. If this variable
+    is set, the file is copied to `${GAU_SSH_KNOWNHOSTS_FILE}` before container
+    command is executed.  Respected by `docker-entry.d/50-ssh-known-hosts`.
+
 GAU\_SSH\_KNOWNHOSTS\_FILE
 :   Where SSH host fingerprints are written to. Defaults to
     `${HOME}/known_hosts`. Respected by `docker-entry.d/50-ssh-known-hosts`.
@@ -84,6 +95,11 @@ GAU\_SSH\_PRIVKEY
 :   SSH private key. If this variable is set, its contents is written to
     `${GAU_SSH_PRIVKEY_FILE}` before container command is executed.  Respected
     by `docker-entry.d/50-ssh-privkey`.
+
+GAU\_SSH\_PRIVKEY\_SRC\_FILE
+:   Path to a file containing SSH private key. If this variable is set, the
+    file is copied to `${GAU_SSH_PRIVKEY_FILE}` before container command is
+    executed.  Respected by `docker-entry.d/50-ssh-privkey`.
 
 GAU\_SSH\_PRIVKEY\_FILE
 :   Where SSH private keys are written to. Defaults to `${HOME}/.ssh/id_rsa`.
