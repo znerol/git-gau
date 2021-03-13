@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 
+## [1.2.1] - 2021-03-13
+### Changed
+- Fix automated release
+
 ## [1.2.0] - 2021-03-13
 ### Added
 - Respect branch name in repository URL (#8)
@@ -23,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release.
 
-[Unreleased]: https://github.com/znerol/git-gau/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/znerol/git-gau/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/znerol/git-gau/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/znerol/git-gau/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/znerol/git-gau/compare/v1.0.0...v1.1.0

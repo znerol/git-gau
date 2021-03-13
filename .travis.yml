@@ -48,7 +48,7 @@ jobs:
       deploy:
         provider: releases
         api_key:
-          secure: d5OiTAzExGVZwwrx+a4yLGgSl60rlMP++C06AfkSclmm67UrnTj6ysLJUVnB9hy0+NPIBxCtHc4oN9ctT8ihEC2unGx/ddD+D3m6yjYLJ5tX1hyqoznaN1k0skayBPWOdgpH30QWGQp0L9TXchc6GevAteukhtai8CCSQlHMJoDsjbVhPoO5tMMqlekcDfEuTWe4Xv8t3RKF4Rf5h4h9VZUg/6nI6rGgwbi1hEvqUfu7qyK6p37yVbhy3J+29oIQhBYrpYm2JVPCNDC7n72c269EPoOeA8Ni69hD9rhf3X5q4Ncvbm4a/lXYY9Mr0uOqmYgJYZPqCkL6S3VJSDPtpAGaU3FbSdkUQCQo7SYJtaLJ55SMpIMZ5eED5t3v18wdws8R0mxufqrcKhNV78y4/lgrbhj2bmwk7V9+LtDomT/TbpqHtHzINZHuFtBHpGCX1m3y6Lei/wmihqoMtNvYHGrve4jcpZvPtJ3WTLk/z1pRR4V77Kd0VsewkEOeL6Hlnso1atK5AWnNDnOKok49Z+Cqq0JlZKWAB1hyyHlD89ebPZNtOfzZPbhhRn3VWYwYBOm2dH1FzGniC57q1kUCh26m2pRGzDvtf2qTjMLMDQG0JxEd+Nz5AkrBXj4Go7xPfzoDBghUJC/kapUCJ03a3yvHVwAOWtCf239Svz26zuA=
+          secure: f9mLqWYkHzRvmsHPkFxcpcbAtM5IsCjE/CPp3nNwzQ+SrcIReCjJEs694BO6rvieCx+HK2aLgW9zIdz2ZVkF7hMBlQPCXkkWck5T+ZQ1Dvn3A4pcIBI2whY21ojUVu2dL6UYEoV4D6JkJDEPRB+yroit780Ik0iAFdc7NhFl66qwZXmrPQby3AHpkoMSjkH/h5/hWiR4DqOlRMByzPQSIOnbFAG7RWzc7iZaUL7N3mzQZXvx+u4mbXWIT/oXJdDbZfwrL6yNiJiO8NliOXcO71ja/Be9EDqcEOU6DIBrDWqAaXrIW9Bu/jUUHiyiuMI5515q+HAhnYwQq5+68j8zI+x0W1ns4rJhtvs4n0JTTFEJglMiRHC+bkbPxubH4Gy0/Djvc9SMPXD9LO8mfk3yv7SE5NPJ0zrYCjfBEAN7yV0bnaB3kBo76B1RcMq9R5mcU3WDK+Z6BrYtRSAwa3OJ1wR+XExJT7xF9A2qfuH+1Q2qBtkB04lHlme3XxSn6+gtKKTfHXlHZvW6H8Dopj3SfRV5f4ezlwGyiTJlRVXRB3NcJGA04XhBwAQSxIM4dlDyqLPEDnnjFCb/YCvlqVnypEE1OIIooMsVkOehkNoypIciOsCabsmILC2sAgbYBcqKaJtolo4Mp5DE/KEIOBNMHZ9fSbFcJmj04HReyPfphyo=
         file:
           - dist/git-gau-dist.tar.gz
           - dist/git-gau-src.tar.gz
