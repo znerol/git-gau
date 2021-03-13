@@ -28,10 +28,21 @@ trap cleanup EXIT
 # Setup required environment.
 GIT_WORK_TREE="${WORKDIR}"
 GIT_DIR="${GIT_WORK_TREE}/.git"
+REPOURL="${1}"; shift
+
+# Split off branch name if any.
+BRANCHFLAG=""
+BRANCHARG=""
+case "${REPOURL}" in
+  *#*)
+    BRANCHFLAG="--branch"
+    BRANCHARG="${REPOURL#*#}"
+    REPOURL="${REPOURL%%#*}"
+    ;;
+esac
 
 # Clone repository.
-REPOURL="${1}"; shift
-${ECHO} "${GAU_CLONE_ARGS:---quiet}" -- "${REPOURL}" "${GIT_WORK_TREE}" | ${XARGS} ${GIT} clone
+${ECHO} "${GAU_CLONE_ARGS:---quiet}" "${BRANCHFLAG}" "${BRANCHARG}" -- "${REPOURL}" "${GIT_WORK_TREE}" | ${XARGS} ${GIT} clone
 
 # git-clone fails when GIT_WORK_TREE is defined. Thus the environment is only
 # exported just before running the command.
