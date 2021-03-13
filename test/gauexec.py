@@ -127,14 +127,33 @@ class ExecTestCase(unittest.TestCase):
         """
         Simple script no changes, push to new branch.
         """
-        env = os.environ.copy()
 
         script = 'git checkout -b feature/master/bells-and-whistles'
         self._cmd('git', 'gau-exec', self.repodir,
-                           '/bin/sh', '-c', script, env=env)
+                           '/bin/sh', '-c', script)
 
         logs = self._cmd('git', 'log', '--format=%s', 'master')
         self.assertEqual(logs, b'Initial commit\n')
 
         logs = self._cmd('git', 'log', '--format=%s', 'feature/master/bells-and-whistles')
         self.assertEqual(logs, b'Initial commit\n')
+
+    def testBranchSpecifiedInUrl(self):
+        """
+        Clone from branch specified in URL
+        """
+
+        # First step create a new branch in the repo
+        script = 'git checkout -b some-other-branch'
+        self._cmd('git', 'gau-exec', self.repodir, '/bin/sh', '-c', script)
+
+        # Second step clone the new branch but specify it in the git url.
+        repourl = ''.join([self.repodir, "#", 'some-other-branch'])
+        script = 'git commit --quiet --allow-empty -m "Branch commit"'
+        self._cmd('git', 'gau-exec', repourl, '/bin/sh', '-c', script)
+
+        logs = self._cmd('git', 'log', '--format=%s', 'master')
+        self.assertEqual(logs, b'Initial commit\n')
+
+        logs = self._cmd('git', 'log', '--format=%s', 'some-other-branch')
+        self.assertEqual(logs, b'Branch commit\nInitial commit\n')
