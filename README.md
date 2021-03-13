@@ -3,7 +3,7 @@
 A collection of custom git commands which make it easier to create bots which
 commit and push changes automatically.
 
-[![Build Status](https://travis-ci.org/znerol/git-gau.svg?branch=master)](https://travis-ci.org/znerol/git-gau)
+[![Build Status](https://travis-ci.com/znerol/git-gau.svg?branch=develop)](https://travis-ci.com/znerol/git-gau)
 
 ## INSTALL
 
