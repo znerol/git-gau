@@ -20,6 +20,9 @@ New commits are only pushed if the command returns a zero *exit status*. In
 order to retrieve the path to the working directory from within a script *git
 rev-parse --show-toplevel* can be used.
 
+The *repository-url* can be anything supported by *git-clone*. Optionally a
+branch name can be specified after the hash character (*#*).
+
 # EXAMPLES
 
 Update dependencies of a JavaScript project hosted on a remote server and
@@ -27,6 +30,11 @@ automatically push a new commit if anything changed.
 
     export GAU_CHECKOUT_ARGS="-b npm-update-$(date -I)"
     git gau-exec https://example.com/project.git gau-ac npm update
+
+Build a container from a specific branch (note: does not push it to a registry
+though):
+
+    git gau-exec https://example.com/container.git#latest podman build -t container:latest
 
 # VARIABLES
 
