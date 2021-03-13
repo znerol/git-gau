@@ -16,6 +16,9 @@ endif
 ifeq ($(mandir),)
     mandir := $(datarootdir)/man
 endif
+ifeq ($(python),)
+    python := python
+endif
 
 all: bin test doc
 
@@ -37,7 +40,7 @@ lint: bin
 	shellcheck lib/docker-entry.d/50-ssh-privkey
 
 test: bin
-	PATH="$(shell pwd)/bin:${PATH}" python -m test
+	PATH="$(shell pwd)/bin:${PATH}" $(python) -m test
 
 doc: \
 	doc/git-gau-ac.1 \
