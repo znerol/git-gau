@@ -19,7 +19,7 @@ jobs:
 
     - stage: "Unit test"
       script:
-        - make test
+        - make python=python3 test
 
     - stage: "Integration test"
       services:
