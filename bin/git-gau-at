@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# git-gau-at - Apply a command and record its output into an annotated tag.
+
+set -e
+set -u
+
+# Required binaries
+DATE=/bin/date
+ECHO=/bin/echo
+GIT=/usr/bin/git
+MKFIFO=/usr/bin/mkfifo
+MKTEMP=/bin/mktemp
+RM=/bin/rm
+TEE=/usr/bin/tee
+XARGS=/usr/bin/xargs
+
+# Print usage message and exit.
+if [ "${#}" -lt 2 ] || [ "${1:-h}" = "-h" ] || [ "${1:---help}" = "--help" ]; then
+    ${ECHO} "${0}: command tag-format [args...]" >&2
+    exit 1
+fi
+
+TAG_FMT="${1}"; shift
+
+# Regrettably it is not possible to use string replacement here (e.g.,
+# ${TAG_FMT/%d/1970-01-01}). since not all shells support that.
+
+# Substitute date placeholder (%d) in TAG_FMT
+case "${TAG_FMT}" in
+  *%d*)
+    HEAD="${TAG_FMT%%%d*}"
+    TAIL="${TAG_FMT#*%d}"
+    TAG_FMT="${HEAD}$(${DATE} "${GAU_AT_DATE_UTC:--u}" "${GAU_AT_DATE_FMT:-+%Y%m%dT%H%M%SZ}")${TAIL}"
+    ;;
+esac
+
+# Substitute date placeholder (%b) in TAG_FMT
+case "${TAG_FMT}" in
+  *%b*)
+    HEAD="${TAG_FMT%%%b*}"
+    TAIL="${TAG_FMT#*%b}"
+    TAG_FMT="${HEAD}$(${GIT} rev-parse --abbrev-ref HEAD)${TAIL}"
+    ;;
+esac
+
+# Replicate output of command to stdout.
+LOGDIR="$(${MKTEMP} -d)"
+cleanup() {
+    ${RM} -rf "${LOGDIR}"
+}
+trap cleanup EXIT
+
+LOGFIFO="${LOGDIR}/fifo"
+LOGFILE="${LOGDIR}/stdout"
+${MKFIFO} "${LOGFIFO}"
+${TEE} "${LOGFILE}" < "${LOGFIFO}" &
+
+# Run command and record annotation message.
+"${@}" > "${LOGFIFO}"
+
+# Record output into annotated tag.
+${ECHO} -a -F "${LOGFILE}" "${GAU_TAG_ARGS:-}" -- "${TAG_FMT}" | ${XARGS} ${GIT} tag
