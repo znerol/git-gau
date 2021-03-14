@@ -51,10 +51,16 @@ export GIT_WORK_TREE GIT_DIR
 # Run command.
 "${@}"
 
-# Push results (if any).
+# Push commits (if any).
 BRANCH="${GAU_PUSH_BRANCH:-$(${GIT} rev-parse --abbrev-ref HEAD)}"
 BRANCHHASH=$(${GIT} rev-parse "origin/${BRANCH}" 2>/dev/null || ${ECHO})
 HEADHASH="$(${GIT} rev-parse HEAD)"
 if [ -z "$BRANCHHASH" ] || [ "${HEADHASH}" != "${BRANCHHASH}" ]; then
     ${ECHO} "${GAU_PUSH_ARGS:---quiet}" -- origin "HEAD:${BRANCH}" | ${XARGS} ${GIT} push
+fi
+
+# Push tags (if any).
+TAGS=$(${GIT} tag --points-at HEAD)
+if [ -n "${TAGS}" ]; then
+    ${ECHO} "${GAU_PUSH_ARGS:---quiet}" -- origin "${TAGS}" | ${XARGS} ${GIT} push
 fi
