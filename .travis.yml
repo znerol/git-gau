@@ -18,6 +18,10 @@ jobs:
         - make lint
 
     - stage: "Unit test"
+      addons:
+        apt:
+          packages:
+            - python3-dateutil
       script:
         - make python=python3 test
 
