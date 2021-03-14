@@ -30,6 +30,7 @@ bin:
 
 lint: bin
 	shellcheck bin/git-gau-ac
+	shellcheck bin/git-gau-at
 	shellcheck bin/git-gau-autoclean
 	shellcheck bin/git-gau-automerge
 	shellcheck bin/git-gau-exec
@@ -44,6 +45,7 @@ test: bin
 
 doc: \
 	doc/git-gau-ac.1 \
+	doc/git-gau-at.1 \
 	doc/git-gau-autoclean.1 \
 	doc/git-gau-automerge.1 \
 	doc/git-gau-docker-entry.1 \
@@ -52,6 +54,7 @@ doc: \
 
 clean:
 	-rm -f doc/git-gau-ac.1
+	-rm -f doc/git-gau-at.1
 	-rm -f doc/git-gau-autoclean.1
 	-rm -f doc/git-gau-automerge.1
 	-rm -f doc/git-gau-docker-entry.1
@@ -62,6 +65,7 @@ clean:
 
 install-doc: doc
 	install -m 0644 -D doc/git-gau-ac.1 $(DESTDIR)$(mandir)/man1/git-gau-ac.1
+	install -m 0644 -D doc/git-gau-at.1 $(DESTDIR)$(mandir)/man1/git-gau-at.1
 	install -m 0644 -D doc/git-gau-autoclean.1 $(DESTDIR)$(mandir)/man1/git-gau-autoclean.1
 	install -m 0644 -D doc/git-gau-automerge.1 $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
 	install -m 0644 -D doc/git-gau-docker-entry.1 $(DESTDIR)$(mandir)/man1/git-gau-docker-entry.1
@@ -70,6 +74,7 @@ install-doc: doc
 
 install-bin: bin
 	install -m 0755 -D bin/git-gau-ac $(DESTDIR)$(bindir)/git-gau-ac
+	install -m 0755 -D bin/git-gau-at $(DESTDIR)$(bindir)/git-gau-at
 	install -m 0755 -D bin/git-gau-autoclean $(DESTDIR)$(bindir)/git-gau-autoclean
 	install -m 0755 -D bin/git-gau-automerge $(DESTDIR)$(bindir)/git-gau-automerge
 	install -m 0755 -D bin/git-gau-exec $(DESTDIR)$(bindir)/git-gau-exec
@@ -83,6 +88,7 @@ install: install-bin install-doc
 
 uninstall:
 	-rm -f $(DESTDIR)$(bindir)/git-gau-ac
+	-rm -f $(DESTDIR)$(bindir)/git-gau-at
 	-rm -f $(DESTDIR)$(bindir)/git-gau-autoclean
 	-rm -f $(DESTDIR)$(bindir)/git-gau-automerge
 	-rm -f $(DESTDIR)$(bindir)/git-gau-exec
@@ -92,6 +98,7 @@ uninstall:
 	-rm -f $(DESTDIR)$(libdir)/git-gau/docker-entry.d/50-ssh-known-hosts
 	-rm -f $(DESTDIR)$(libdir)/git-gau/docker-entry.d/50-ssh-privkey
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-ac.1
+	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-at.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-autoclean.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-docker-entry.1
