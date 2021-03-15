@@ -34,6 +34,7 @@ lint: bin
 	shellcheck bin/git-gau-autoclean
 	shellcheck bin/git-gau-automerge
 	shellcheck bin/git-gau-exec
+	shellcheck bin/git-gau-tag-expiry
 	shellcheck bin/git-gau-xargs
 	shellcheck lib/docker-entry
 	shellcheck lib/docker-entry.d/50-git-credentials
@@ -50,6 +51,7 @@ doc: \
 	doc/git-gau-automerge.1 \
 	doc/git-gau-docker-entry.1 \
 	doc/git-gau-exec.1 \
+	doc/git-gau-tag-expiry.1 \
 	doc/git-gau-xargs.1
 
 clean:
@@ -59,6 +61,7 @@ clean:
 	-rm -f doc/git-gau-automerge.1
 	-rm -f doc/git-gau-docker-entry.1
 	-rm -f doc/git-gau-exec.1
+	-rm -f doc/git-gau-tag-expiry.1
 	-rm -f doc/git-gau-xargs.1
 	-rm -rf dist
 	-rm -rf build
@@ -70,6 +73,7 @@ install-doc: doc
 	install -m 0644 -D doc/git-gau-automerge.1 $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
 	install -m 0644 -D doc/git-gau-docker-entry.1 $(DESTDIR)$(mandir)/man1/git-gau-docker-entry.1
 	install -m 0644 -D doc/git-gau-exec.1 $(DESTDIR)$(mandir)/man1/git-gau-exec.1
+	install -m 0644 -D doc/git-gau-tag-expiry.1 $(DESTDIR)$(mandir)/man1/git-gau-tag-expiry.1
 	install -m 0644 -D doc/git-gau-xargs.1 $(DESTDIR)$(mandir)/man1/git-gau-xargs.1
 
 install-bin: bin
@@ -78,6 +82,7 @@ install-bin: bin
 	install -m 0755 -D bin/git-gau-autoclean $(DESTDIR)$(bindir)/git-gau-autoclean
 	install -m 0755 -D bin/git-gau-automerge $(DESTDIR)$(bindir)/git-gau-automerge
 	install -m 0755 -D bin/git-gau-exec $(DESTDIR)$(bindir)/git-gau-exec
+	install -m 0755 -D bin/git-gau-tag-expiry $(DESTDIR)$(bindir)/git-gau-tag-expiry
 	install -m 0755 -D bin/git-gau-xargs $(DESTDIR)$(bindir)/git-gau-xargs
 	install -m 0755 -D lib/docker-entry $(DESTDIR)$(libdir)/git-gau/docker-entry
 	install -m 0755 -D lib/docker-entry.d/50-git-credentials $(DESTDIR)$(libdir)/git-gau/docker-entry.d/50-git-credentials
@@ -92,6 +97,7 @@ uninstall:
 	-rm -f $(DESTDIR)$(bindir)/git-gau-autoclean
 	-rm -f $(DESTDIR)$(bindir)/git-gau-automerge
 	-rm -f $(DESTDIR)$(bindir)/git-gau-exec
+	-rm -f $(DESTDIR)$(bindir)/git-gau-tag-expiry
 	-rm -f $(DESTDIR)$(bindir)/git-gau-xargs
 	-rm -f $(DESTDIR)$(libdir)/git-gau/docker-entry
 	-rm -f $(DESTDIR)$(libdir)/git-gau/docker-entry.d/50-git-credentials
@@ -103,6 +109,7 @@ uninstall:
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-automerge.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-docker-entry.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-exec.1
+	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-tag-expiry.1
 	-rm -f $(DESTDIR)$(mandir)/man1/git-gau-xargs.1
 
 dist-bin:

@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# git-gau-tag-expiry - Run a command if the most recent tag is older than n
+# seconds.
+
+set -e
+set -u
+
+# Required binaries
+ECHO=/bin/echo
+GIT=/usr/bin/git
+DATE=/bin/date
+
+# Print usage message and exit.
+usage() {
+    ${ECHO} "${0}: tag-pattern seconds command [args...]" >&2
+    exit 1
+}
+
+# Run a command if mast recent tag is older than n seconds.
+#
+# $1: Tag pattern. May contain branch placeholder (%b)
+# $2: Maximum time to last tag.
+# $@: Command [args...]
+gau_tag_expiry() {
+    PATTERN="${1}"
+    THRESHOLD="${2}"
+    shift 2
+
+    # Substitute branch placeholder (%b) in PATTERN
+    case "${PATTERN}" in
+      *%b*)
+        HEAD="${PATTERN%%%b*}"
+        TAIL="${PATTERN#*%b}"
+        PATTERN="${HEAD}$(${GIT} rev-parse --abbrev-ref HEAD)${TAIL}"
+        ;;
+    esac
+
+    # Select the most recent annotated tag matching the given PATTERN and store
+    # its unix timestamp into the TAG_DATE var.
+    TAG_DATE=$(${GIT} for-each-ref --count=1 --sort=-taggerdate \
+        --format="%(taggerdate:unix)" "refs/tags/${PATTERN}")
+    TAG_EXPIRY=$(($(${DATE} +%s) - THRESHOLD))
+
+    # Run command if no tag exists or if it is too old.
+    if [ -z "${TAG_DATE}" ] || [ "${TAG_DATE}" -gt ${TAG_EXPIRY} ]; then
+        "$@"
+    fi
+}
+
+if [ "${#}" -gt 3 ] && [ "${1:-}" != "-h" ] && [ "${1:-}" != "--help" ]; then
+    gau_tag_expiry "${@}"
+else
+    usage
+fi
