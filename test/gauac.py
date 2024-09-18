@@ -42,6 +42,24 @@ class AcTestCase(unittest.TestCase):
             content = f.read()
             self.assertEqual(content, b'hello\n')
 
+    def testCommitStderr(self):
+        """
+        Simple script resulting in modified file and log message.
+        """
+
+        script = 'echo hello > test.txt; echo Stderr subject >&2'
+        output = self._cmd('git', 'gau-ac', '/bin/sh', '-c', script)
+        self.assertEqual(output, b'Stderr subject\n')
+
+        logs = self._cmd('git', 'log', '--format=%s')
+
+        self.assertEqual(logs, b'Stderr subject\nInitial commit\n')
+
+        self._cmd('git', 'clean', '-dxf')
+        with open(os.path.join(self.repodir, 'test.txt'), 'rb') as f:
+            content = f.read()
+            self.assertEqual(content, b'hello\n')
+
     def testCommitOnNewBranch(self):
         """
         Create and checkout a new branch before committing new file and log message.
