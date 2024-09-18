@@ -143,6 +143,14 @@ class ExecTestCase(unittest.TestCase):
         Clone from branch specified in URL
         """
 
+        env = os.environ.copy()
+        env.update({
+            'GIT_COMMITTER_NAME': 'Test Committer',
+            'GIT_COMMITTER_EMAIL': 'committer@localhost',
+            'GIT_AUTHOR_NAME': 'Test Author',
+            'GIT_AUTHOR_EMAIL': 'author@localhost',
+        })
+
         # First step create a new branch in the repo
         script = 'git checkout -b some-other-branch'
         self._cmd('git', 'gau-exec', self.repodir, '/bin/sh', '-c', script)
@@ -150,7 +158,7 @@ class ExecTestCase(unittest.TestCase):
         # Second step clone the new branch but specify it in the git url.
         repourl = ''.join([self.repodir, "#", 'some-other-branch'])
         script = 'git commit --quiet --allow-empty -m "Branch commit"'
-        self._cmd('git', 'gau-exec', repourl, '/bin/sh', '-c', script)
+        self._cmd('git', 'gau-exec', repourl, '/bin/sh', '-c', script, env=env)
 
         logs = self._cmd('git', 'log', '--format=%s', 'master')
         self.assertEqual(logs, b'Initial commit\n')
