@@ -36,7 +36,7 @@ ${MKFIFO} "${LOGFIFO}"
 ${TEE} "${LOGFILE}" < "${LOGFIFO}" &
 
 # Run command and record commit message.
-"${@}" > "${LOGFIFO}"
+"${@}" > "${LOGFIFO}" 2>&1
 
 # Record changes to files.
 ${ECHO} "${GAU_ADD_ARGS:---all}" | ${XARGS} ${GIT} add
