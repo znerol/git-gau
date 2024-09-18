@@ -7,6 +7,7 @@ from .gauat import *
 from .gauautoclean import *
 from .gauautomerge import *
 from .gauexec import *
+from .gautagexpiry import *
 from .gauxargs import *
 
 unittest.main()
