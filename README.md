@@ -3,8 +3,6 @@
 A collection of custom git commands which make it easier to create bots which
 commit and push changes automatically.
 
-[![Build Status](https://travis-ci.com/znerol/git-gau.svg?branch=develop)](https://travis-ci.com/znerol/git-gau)
-
 ## INSTALL
 
 Navigate to the releases page and pick the latest `git-gau-dist.tar.gz`
