@@ -38,6 +38,19 @@ class AtTestCase(unittest.TestCase):
 
         self.assertEqual(tags, b'some-tag Tag message\n\n')
 
+    def testMessageStderr(self):
+        """
+        Static tag with simple script resulting in a message.
+        """
+
+        script = 'echo Tag message from stderr >&2'
+        output = self._cmd('git', 'gau-at', 'some-tag', '/bin/sh', '-c', script)
+        self.assertEqual(output, b'Tag message from stderr\n')
+
+        tags = self._cmd('git', 'tag', '--format=%(refname:short) %(contents)')
+
+        self.assertEqual(tags, b'some-tag Tag message from stderr\n\n')
+
     def testTagWithBranchAndDate(self):
         """
         Dynamic tag with branch and date and a simple script resulting in a message.

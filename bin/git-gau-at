@@ -57,7 +57,7 @@ ${MKFIFO} "${LOGFIFO}"
 ${TEE} "${LOGFILE}" < "${LOGFIFO}" &
 
 # Run command and record annotation message.
-"${@}" > "${LOGFIFO}"
+"${@}" > "${LOGFIFO}" 2>&1
 
 # Record output into annotated tag.
 ${ECHO} -a -F "${LOGFILE}" "${GAU_TAG_ARGS:-}" -- "${TAG_FMT}" | ${XARGS} ${GIT} tag
