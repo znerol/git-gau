@@ -1,0 +1,36 @@
+---
+name: Run integration tests
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_call:
+    secrets:
+      GAU_SSH_PRIVKEY:
+        required: true
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install pandoc
+
+      - name: Build dist tarball
+        run: |
+          make dist
+
+      - name: Run integration tests
+        env:
+          GAU_SSH_PRIVKEY: "${{ secrets.GAU_SSH_PRIVKEY }}"
+        run: |
+          make -C integration-test image
+          make -C integration-test all
